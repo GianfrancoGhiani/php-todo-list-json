@@ -18,26 +18,23 @@ Permettere di segnare un task come completato facendo click sul testo
 Permettere il toggle del task (completato/non completato)
 Abilitare l’eliminazione di un task
 */
-/*
-milestone 1
-creare l'estetica della pagina  html con vue e css 
-collegare i file e verificare il collegamento tramite invio con input GET/POST
-
-milestone2
-collegare i dati ad un file data.json
-*/
 const {createApp} = Vue;
 const app = createApp({
     data() {
         return {
-
+            itemsArray:[],
         }
     },
     methods: {
-        
+        getList(){
+            axios.get('server.php').then((answ)=>{
+               console.log(answ.data)
+                this.itemsArray = answ.data;
+            })
+        }
     },
     created() {
-      
+      this.getList()
     },
 });
 app.mount('#app');

@@ -18,13 +18,13 @@
 
     <div id="app" class="container">
         <h1>ToDo</h1>
-        <form method="POST" class="wrapper">
-            <input type="text" name="newTask" id="newTask" placeholder="Add a new task">
-            <button>Add</button>
-        </form>
+        <div class="wrapper">
+            <input type="text" name="newTask" id="newTask" placeholder="Add a new task" v-model="newtask.text">
+            <button @click="save()">Add</button>
+        </div>
         <div class="wrapper">
             <ul>
-                <li v-for="item in itemsArray" :class="item.done? 'done': ''">{{ item.text}}</li>
+                <li v-for="item in itemsArray" :class="(item.done == true)? 'done': ''">{{ item.text}}</li>
             </ul>
         </div>
 

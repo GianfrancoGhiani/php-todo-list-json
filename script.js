@@ -23,6 +23,10 @@ const app = createApp({
     data() {
         return {
             itemsArray:[],
+            newtask:{
+                text: '',
+                done: false
+            }
         }
     },
     methods: {
@@ -31,7 +35,20 @@ const app = createApp({
                console.log(answ.data)
                 this.itemsArray = answ.data;
             })
+        },
+        save(){
+            console.log(this.newtask)
+            axios.post('server.php', {newtask: this.newtask},{
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }}).then((answ)=>{
+                    // console.log(answ.data)
+                    this.newtask.text= '';
+                    this.getList();
+                })
+            
         }
+        
     },
     created() {
       this.getList()
